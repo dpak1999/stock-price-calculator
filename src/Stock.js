@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-const Stock = () => {
+const Stock = ({ flag, setFlag }) => {
   const [state, setState] = useState({
     buyPrice: '',
     qty: '',
@@ -39,6 +39,7 @@ const Stock = () => {
           2
         )}% & loss amount is Rs ${loss}`
       );
+      setFlag(1);
     } else if (sellingPrice > buyingPrice) {
       // profit
       const profit = (sellingPrice - buyingPrice) * quantity;
@@ -49,14 +50,16 @@ const Stock = () => {
           2
         )}%`
       );
+      setFlag(2);
     } else {
       // nothing
       setMessage(`You are still even and with no loss & no gain`);
+      setFlag(0);
     }
   };
 
   return (
-    <div className=" text-center">
+    <div className="text-center">
       <h1 className=" mt-3 font-mono">Enter buying price</h1>
       <input
         name="buyPrice"
