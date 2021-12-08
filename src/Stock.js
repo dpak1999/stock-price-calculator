@@ -9,6 +9,7 @@ const Stock = () => {
     sellPrice: '',
   });
   const [disabled, setDisabled] = useState(true);
+  const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     const val = e.target.value;
@@ -24,8 +25,34 @@ const Stock = () => {
   };
 
   const handleClick = () => {
-    console.log(state);
-    console.log(disabled);
+    const buyingPrice = Number(state.buyPrice);
+    const quantity = Number(state.qty);
+    const sellingPrice = Number(state.sellPrice);
+
+    if (buyingPrice > sellingPrice) {
+      // loss
+      const loss = (buyingPrice - sellingPrice) * quantity;
+      const lossPercent = (loss / buyingPrice) * 100;
+
+      setMessage(
+        `😰😰😰 Ooops!! Your stock price have fallen by ${lossPercent.toFixed(
+          2
+        )}% & loss amount is Rs ${loss}`
+      );
+    } else if (sellingPrice > buyingPrice) {
+      // profit
+      const profit = (sellingPrice - buyingPrice) * quantity;
+      const profitPercent = (profit / buyingPrice) * 100;
+
+      setMessage(
+        `🥳🥳🥳 wohoo!! You made a profit of Rs ${profit} and profit percent is ${profitPercent.toFixed(
+          2
+        )}%`
+      );
+    } else {
+      // nothing
+      setMessage(`You are still even and with no loss & no gain`);
+    }
   };
 
   return (
@@ -68,6 +95,8 @@ const Stock = () => {
       >
         Check
       </button>
+
+      <div className="text-center text-2xl mt-4">{message && message}</div>
     </div>
   );
 };
