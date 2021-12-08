@@ -1,11 +1,14 @@
 /** @format */
 
+import Stock from './Stock';
+
 function App() {
   return (
-    <div className="bg-gradient-to-b from-red-300 to-purple-700 min-h-screen flex">
-      <h1 className="text-white font-bold text-4xl m-auto italic font-serif">
-        This is a react tailwind starter template
+    <div className="bg-black min-h-screen">
+      <h1 className="text-white text-2xl text-center font-mono pt-3">
+        Calculate profit or loss on your stocks
       </h1>
+      <Stock />
     </div>
   );
 }
